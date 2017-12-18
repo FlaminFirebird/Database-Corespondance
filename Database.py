@@ -23,22 +23,26 @@ try:
         
         # get the results
         for result in cursor:
-            print ("Date: " + result['date'].strftime("%y/%m/%d"))
-            print ("Name: " + result['name'])
-            print ("Game: " + str(result['game']))
-            print ("Score: " + str(result['score']))
-            print ("\n")
+            # make sure that people didn't enter blank data into the database
+            if (result and result['date'] and result['name'] and result['game'] and result['score']):
+                print ("Date: " + result['date'].strftime("%y/%m/%d"))
+                print ("Name: " + result['name'])
+                print ("Game: " + str(result['game']))
+                print ("Score: " + str(result['score']))
+                print ("\n")
         
         
         name = input("What is your name? ")
         game = input("What is your game? ")
         score = input("What was your score? ")
         date = datetime.datetime.now()
-
-      
+        
+        sql = "INSERT INTO scores(date, game, name, score) VALUES('" + str(date) + "', '" + str(game) + "', '" + str(name) + "','" + score + "')"
+        #INSERT INTO `scores`(`date`, `game`, `name`, `score`) VALUES ([date],[game],[name],[score])
+        cursor.execute(sql)
         # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default.
         # Once you run one of those three SQL commands, you must commit to save your changes. 
-        # connection.commit()
+        connection.commit()
         
 finally:
     connection.close()

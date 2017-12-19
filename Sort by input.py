@@ -17,10 +17,10 @@ try:
     with connection.cursor() as cursor:
         # Select all Scores
         
-        #game=input("What game do you want sorted? ")
+        game=input("What game do you want sorted? ")
         
-        #sql = "SELECT * FROM `scores` WHERE 'game' = '" +game+ "' ORDER BY `score` DESC "
-        sql = "SELECT * from scores"
+        sql = "SELECT * FROM `scores` WHERE game = '" +game+ "' ORDER BY score DESC"
+       
         
         #execute the SQL command
         cursor.execute(sql)
@@ -37,18 +37,12 @@ try:
                 print ("\n")
                 
         
-        name = input("What is your name? ")
-        game = input("What is your game? ")
-        score = input("What was your score? ")
-        date = datetime.datetime.now()
-        
-        sql = "INSERT INTO scores(date, game, name, score) VALUES('" + str(date) + "', '" + str(game) + "', '" + str(name) + "','" + score + "')"
+        #sql = "INSERT INTO scores(date, game, name, score) VALUES('" + str(date) + "', '" + str(game) + "', '" + str(name) + "','" + score + "')"
         #INSERT INTO `scores`(`date`, `game`, `name`, `score`) VALUES ([date],[game],[name],[score])
-        cursor.execute(sql)
+        #cursor.execute(sql)
         # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default.
         # Once you run one of those three SQL commands, you must commit to save your changes. 
         connection.commit()
         
 finally:
     connection.close()
-
